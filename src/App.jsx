@@ -5,6 +5,7 @@ function App() {
   const [tallValue, setTallValue] = useState("");
   const [bmi, setBmi] = useState(null);
   const [status, setStatus] = useState("");
+  const [idealWeight, setIdealWeight] = useState(null); 
 
   const calculateBmi = () => {
     if (weightValue > 0 && tallValue > 0) {
@@ -32,6 +33,11 @@ function App() {
           "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRWbsAIZclxhZZhBIAb0IhLPurAmDuTt_uFmFX5VUJKZ-O7udum"
         );
       }
+
+      
+      const heightInInches = tallValue / 2.54;
+      const idealWeightValue = (50 + 2.3 * (heightInInches - 60)).toFixed(2);
+      setIdealWeight(idealWeightValue);
     }
   };
 
@@ -89,6 +95,11 @@ function App() {
               alt="BMI status"
               className="w-32 h-32 mx-auto mt-4 rounded-full shadow-lg"
             />
+            {idealWeight && (
+              <h3 className="mt-4 text-lg">
+                الوزن المثالي : {idealWeight} كغ
+              </h3>
+            )}
           </div>
         )}
       </div>
